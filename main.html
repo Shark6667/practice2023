@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main page</title>
+    <style>
+        html, body {
+            height: 100%;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .container {
+            display: flex;
+            height: 100%;
+        }
+        .left {
+            width: 280px;
+            /* background: red; */
+        }
+        .right {
+            flex: 1;
+            /* background: green; */
+        }
+        .row {
+            display: flex;
+            margin-bottom: 5px;
+        }
+        .city {
+            width: 30%;
+        }
+        .bar {
+            width: 70%;
+            background: #ccc;
+            position: relative;
+        }
+        .line {
+            position: absolute;
+            background: blue;
+            left: 0;
+            width: 100px;
+            height: 100%;
+            transition: all 0.3s ease;
+            text-align: center;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="left">left</div>
+        <div class="right">
+            <div class="cities" id="cities">
+                <!-- <div class="row">
+                    <div class="city">Astana</div>
+                    <div class="bar">
+                        <div class="line" style="width: 35%;"></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="city">Pavlodar</div>
+                    <div class="bar">
+                        <div class="line" style="width: 25%;"></div>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+    </div>
+    <script>
+        const sum = 2+2;
+        console.log(sum, 'summa');
+        fetch('data.json').then(res => res.json()).then(data => {
+            console.log(data);
+            for (let i = 0; i < data.length; i++) {
+                const object = data[i];
+                createObject(object);
+            }
+        });
+
+        function createObject(object) {
+            const cities = document.getElementById('cities');
+            const row = createElement('div', 'row')
+            const city = createElement('div', 'city', object.city);
+            row.appendChild(city);
+
+            const bar = createElement('div', 'bar');
+            const line = createElement('div', 'line', object.value+'%');
+            line.style.width = object.value + '%';
+            bar.appendChild(line);
+            row.appendChild(bar);
+
+
+            cities.appendChild(row);
+        }
+
+        function createElement(tagName, className, innerText) {
+            const element = document.createElement(tagName);
+            element.className = className;
+            if(innerText) {
+                element.innerText = innerText;
+            }
+            return element;
+        }
+    </script>
+</body>
+</html>

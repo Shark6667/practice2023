@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project</title>
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+    <input id="login" type="text" placeholder="login" >
+    <input id="password" type="password" placeholder="password">
+    <button type="submit" onclick="login()">login</button>
+    <script>
+        const user = {
+            login: 'admin',
+            password: 'admin'
+        };
+        function login() {
+            console.log('yes');
+            let login = document.getElementById('login').value;
+            let pass = document.getElementById('password').value;
+            console.log(login, pass, 'login and pass');
+            if(login === user.login && pass === user.password) {
+                // console.log('if');
+                location.href = 'main.html';
+            } else {
+                document.getElementById('login').style.color = 'red';
+                console.log('else')
+            }
+        }
+    </script>
+</body>
